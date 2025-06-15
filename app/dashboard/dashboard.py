@@ -40,13 +40,7 @@ def setup_dashboard():
     """
     Set up and render the main dashboard
     """
-    # Set page title and icon
-    st.set_page_config(
-        page_title="EcoFlow AI - Supply Chain Optimizer",
-        page_icon="🌍",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
+
     
     # Initialize session state if needed
     if 'initialized' not in st.session_state:
