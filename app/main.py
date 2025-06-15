@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 import logging
+import streamlit as st
 
 # Load environment variables
 load_dotenv()
@@ -31,15 +32,15 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+st.set_page_config(
+    page_title="AI Supply Chain Optimizer",
+    page_icon="🌍",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 def main():
     """Main entry point for the Streamlit application"""
-
-    st.set_page_config(
-        page_title="AI Supply Chain Optimizer",
-        page_icon="🌍",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
     
     # Check if API keys are set
     required_apis = ["CLIMATIQ_API_KEY", "ANTHROPIC_API_KEY"]
