@@ -20,6 +20,11 @@ plotly==5.22.0
 matplotlib==3.8.4
 seaborn==0.13.2
 
+# API clients
+# climatiq==0.2.1
+# epa-python==0.1.0
+# carbon-interface==0.1.2
+
 # Database
 sqlalchemy==2.0.29
 psycopg2-binary==2.9.9
