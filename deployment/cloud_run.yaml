@@ -1,0 +1,44 @@
+# Google Cloud Run configuration
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: supply-chain-optimizer
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/PROJECT_ID/supply-chain-optimizer:latest
+          ports:
+            - containerPort: 8501
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "0.5"
+              memory: "1Gi"
+          env:
+            - name: CLIMATIQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-keys
+                  key: climatiq-api-key
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-keys
+                  key: anthropic-api-key
+          # Health check
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          # Startup probe
+          startupProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            failureThreshold: 30
+            periodSeconds: 10
